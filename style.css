@@ -968,6 +968,36 @@ h1, h2, h3 {
     min-height: 600px;
   }
 
+  .hero-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.65) 0%,
+      rgba(0, 0, 0, 0.4) 50%,
+      rgba(0, 0, 0, 0.25) 100%
+    );
+  }
+
+  .hero-heading {
+    color: #FFFFFF;
+  }
+
+  .hero-text {
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .section-hero .section-label {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .cta-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.65) 0%,
+      rgba(0, 0, 0, 0.4) 50%,
+      rgba(0, 0, 0, 0.25) 100%
+    );
+  }
+
   .hero-content {
     padding: 0 20px 64px;
   }
