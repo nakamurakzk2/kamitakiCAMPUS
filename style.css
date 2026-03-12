@@ -808,6 +808,39 @@ h1, h2, h3 {
 }
 
 /* ============================================
+   Parallax
+   ============================================ */
+.parallax-wrap {
+  overflow: hidden;
+}
+
+.parallax-img {
+  will-change: transform;
+  transform: translateY(0);
+}
+
+/* 各コンテナごとの画像拡大（動く余白を確保） */
+.concept-photo .parallax-img,
+.community-photo .parallax-img,
+.community-gallery-item .parallax-img {
+  height: 115%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.photo-break .parallax-img {
+  height: 130%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.place-card-photo .parallax-img {
+  height: 115%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* ============================================
    Scroll Animation
    ============================================ */
 .anim-target {

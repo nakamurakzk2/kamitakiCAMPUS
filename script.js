@@ -5,6 +5,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initHeaderScroll();
   initScrollAnimations();
+  initParallax();
   initMobileMenu();
   initSmoothScroll();
 });
@@ -56,6 +57,57 @@ function initScrollAnimations() {
   );
 
   targets.forEach((target) => observer.observe(target));
+}
+
+/* --- Parallax --- */
+function initParallax() {
+  const items = document.querySelectorAll('.parallax-img');
+  if (!items.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const visibleSet = new Set();
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          visibleSet.add(entry.target);
+        } else {
+          visibleSet.delete(entry.target);
+        }
+      });
+    },
+    { rootMargin: '100px 0px' }
+  );
+
+  items.forEach((img) => observer.observe(img));
+
+  let ticking = false;
+
+  function updateParallax() {
+    const winH = window.innerHeight;
+
+    visibleSet.forEach((img) => {
+      const wrap = img.parentElement;
+      const rect = wrap.getBoundingClientRect();
+      // 0 = top of wrap at bottom of viewport, 1 = bottom of wrap at top of viewport
+      const progress = (winH - rect.top) / (winH + rect.height);
+      // Map to a small offset range: -20px to +20px
+      const offset = (progress - 0.5) * 40;
+      img.style.transform = `translateY(${offset}px)`;
+    });
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(updateParallax);
+    }
+  }, { passive: true });
+
+  // Initial position
+  requestAnimationFrame(updateParallax);
 }
 
 /* --- Mobile Menu --- */
